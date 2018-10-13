@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Instagram
 //
-//  Created by Allen Lozano on 10/5/18.
-//  Copyright © 2018 Allen Lozano. All rights reserved.
+//  Created by Rajeev Ram on 8/10/18.
+//  Copyright © 2018 Rajeev Ram. All rights reserved.
 //
 
 import UIKit
@@ -16,15 +16,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
+        // Initialize Parse
+        // Set applicationId and server based on the values in the Heroku settings.
+        // clientKey is not used on Parse open source unless explicitly configured
         Parse.initialize(
             with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
-                configuration.applicationId = "Instagram"
-                configuration.clientKey = "jfdsg0q34q099d0gh90haghoafgh034"  // set to nil assuming you have not set clientKey
-                configuration.server = "https://tranquil-sea-51700.herokuapp.com/parse"
+                configuration.applicationId = "myID"
+                configuration.clientKey = "shiva"
+                configuration.server = "https://enigmatic-reaches-73301.herokuapp.com/parse"
             })
         )
+        
+        // For persistence
+        if PFUser.current() != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // view controller currently being set in Storyboard as default will be overridden
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "AuthenticatedViewController")
+        }
+        
         return true
     }
 
