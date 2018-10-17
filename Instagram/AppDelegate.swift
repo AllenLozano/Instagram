@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Instagram
 //
-//  Created by Rajeev Ram on 8/10/18.
-//  Copyright © 2018 Rajeev Ram. All rights reserved.
+//  Created by Allen Lozano on 10/5/18.
+//  Copyright © 2018 Allen Lozano. All rights reserved.
 //
 
 import UIKit
@@ -14,27 +14,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Initialize Parse
-        // Set applicationId and server based on the values in the Heroku settings.
-        // clientKey is not used on Parse open source unless explicitly configured
+        // Override point for customization after application launch.
+        
         Parse.initialize(
             with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
-                configuration.applicationId = "myID"
-                configuration.clientKey = "shiva"
-                configuration.server = "https://enigmatic-reaches-73301.herokuapp.com/parse"
-            })
-        )
+                configuration.applicationId = "Instagram"
+                configuration.clientKey = "jfdsg0q34q099d0gh90haghoafgh034"  // set to nil assuming you have not set clientKey
+                configuration.server = "https://tranquil-sea-51700.herokuapp.com/parse"
+                 })
+                )
         
-        // For persistence
+        
         if PFUser.current() != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // view controller currently being set in Storyboard as default will be overridden
-            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "AuthenticatedViewController")
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "Home")
         }
-        
         return true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -59,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    
+    
+    
 }
-
