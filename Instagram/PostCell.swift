@@ -12,6 +12,10 @@ class PostCell: UITableViewCell {
 
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var createdAtLabel: UILabel!
+    
+    
     var indexPath : IndexPath?
 
     override func awakeFromNib() {
