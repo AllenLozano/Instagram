@@ -14,7 +14,6 @@ class HomePageViewController: UIViewController, UITableViewDelegate,UITableViewD
     var posts: [Post] = []
     var refreshControl: UIRefreshControl!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,10 +40,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate,UITableViewD
         let cell = postTableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostCell
         let post = posts[indexPath.row]
         cell.indexPath = indexPath
-
         if let imageFile: PFFile = post.media {
             imageFile.getDataInBackground { (data, error) in
-                if (error == nil) {
+                if (error != nil) {
                     print(error.debugDescription)
                 }
                 else {
@@ -55,7 +53,14 @@ class HomePageViewController: UIViewController, UITableViewDelegate,UITableViewD
         let time = post.createdAt?.description
         cell.createdAtLabel.text = time
         cell.authorLabel.text = PFUser.current()?.username
-        cell.captionLabel.text = post.caption
+        if cell.captionLabel == nil
+        {
+            cell.captionLabel.text = "Default caption."
+        }
+        else{
+            cell.captionLabel.text = post.caption
+        }
+        //cell.captionLabel.text = post.caption
         return cell
     }
     
@@ -87,7 +92,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate,UITableViewD
                 print(error.debugDescription)
             }
         }
+        fetchPostsData()
         self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+        
     }
     @IBAction func photoLibary(_ sender: Any) {
 
